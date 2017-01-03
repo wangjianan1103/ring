@@ -32,7 +32,7 @@ module.exports = function (options) {
     return {
         entry: {
             'polyfills': './src/polyfills.ts',
-            'main':      './src/main.ts'
+            'main':      './src/vendor.ts'
         },
         module: {
             loaders: [
@@ -43,10 +43,6 @@ module.exports = function (options) {
                         'angular2-template-loader',
                         'angular-router-loader'
                     ]
-                },
-                {
-                    test: /\.html$/,
-                    loader: 'html'
                 },
                 {
                     test: /\.json$/,

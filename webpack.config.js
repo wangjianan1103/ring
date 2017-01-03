@@ -15,6 +15,7 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const V8LazyParseWebpackPlugin = require('v8-lazy-parse-webpack-plugin');
 /**
  * Webpack Constants
@@ -41,6 +42,10 @@ module.exports = function (env) {
         },
 
         plugins: [
+            new HtmlWebpackPlugin({
+                template: 'src/index.html'
+            }),
+
             new WebpackMd5Hash(),
 
             new DefinePlugin({
@@ -73,31 +78,6 @@ module.exports = function (env) {
                     if_return: true,
                     join_vars: true,
                     negate_iife: false // we need this for lazy v8
-                }
-            }),
-
-            new LoaderOptionsPlugin({
-                minimize: true,
-                debug: false,
-                options: {
-
-                    /**
-                     * Html loader advanced options
-                     *
-                     * See: https://github.com/webpack/html-loader#advanced-options
-                     */
-                    // TODO: Need to workaround Angular 2's html syntax => #id [bind] (event) *ngFor
-                    htmlLoader: {
-                        minimize: true,
-                        removeAttributeQuotes: false,
-                        caseSensitive: true,
-                        customAttrSurround: [
-                            [/#/, /(?:)/],
-                            [/\*/, /(?:)/],
-                            [/\[?\(?/, /(?:)/]
-                        ],
-                        customAttrAssign: [/\)?\]?=/]
-                    }
                 }
             })
         ]
