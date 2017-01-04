@@ -15,6 +15,7 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const V8LazyParseWebpackPlugin = require('v8-lazy-parse-webpack-plugin');
 /**
  * Webpack Constants
@@ -44,6 +45,10 @@ module.exports = function (env) {
         plugins: [
 
             new WebpackMd5Hash(),
+
+            new CopyWebpackPlugin([
+                { from: 'src/assets', to: 'assets' }
+            ]),
 
             new DefinePlugin({
                 'ENV': JSON.stringify(METADATA.ENV),

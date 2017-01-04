@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid">
+            <!-- 内容区域 -->
+            <div class="col-md-10">
+                <input type="text" class="form-control" placeholder="写下笔记标题" [(ngModel)]="title">
+                <div id="editormd">
+                    <textarea style="display:none;" id="text"></textarea>
+                </div>
+                <hr style="margin-top: 5px;">
+            </div>
+            <div class="col-md-2">
+                <!-- 标签 -->
+                <a data-toggle="tooltip" data-placement="bottom" title="标签">
+                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                </a>
+                <span>标签</span>
+                <hr style="margin-top: 5px; margin-bottom: 6px;">
+                <div>
+                    <span *ngFor="let mark of marks">
+                        <a class="label label-info" name="mark" [attr.data-mark-gid]="mark.gid" style="padding: 0.2em 0.4em 0.2em;" checkboxClickColor data-mark-flag="0">{{mark.name}}</a>
+                    </span>
+                </div>
+                <br>
+
+                <!-- 分类 -->
+                <a data-toggle="tooltip" data-placement="bottom" title="标签">
+                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                </a>
+                <span>分类</span>
+                <hr style="margin-top: 5px; margin-bottom: 6px;">
+                <div>
+                    <span *ngFor="let channel of channels">
+                        <a class="label label-info" name="channel" [attr.data-channel-gid]="channel.gid" style="padding: 0.2em 0.4em 0.2em;" radioClickColor data-channel-flag="0">{{channel.name}}</a>
+                    </span>
+                </div>
+                <br>
+
+                <!-- 缩略图 -->
+                <a data-toggle="tooltip" data-placement="bottom" title="标签">
+                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                </a>
+                <span>缩略图</span>
+                <hr style="margin-top: 5px; margin-bottom: 6px;">
+                <a class="thumbnail">
+                    <img data-src="holder.js/140x140" class="img-circle" alt="140x140" style="width: 140px; height: 140px;" src="http://og4nfuylr.bkt.clouddn.com/1745332,106.jpg" data-holder-rendered="true">
+                </a>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
