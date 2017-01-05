@@ -17,7 +17,11 @@ const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const V8LazyParseWebpackPlugin = require('v8-lazy-parse-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 /**
  * Webpack Constants
  */
@@ -37,19 +41,58 @@ module.exports = function (env) {
 
         output: {
             path: helpers.root('dist'),
-            filename: '[name].[chunkhash].bundle.js',
-            sourceMapFilename: '[name].[chunkhash].bundle.map',
-            chunkFilename: '[id].[chunkhash].chunk.js'
+            filename: '[name].bundle.js',
+            sourceMapFilename: '[name].bundle.map',
+            chunkFilename: '[id].chunk.js'
         },
 
         plugins: [
+            new AssetsPlugin({
+                path: helpers.root('dist'),
+                filename: 'webpack-assets.json',
+                prettyPrint: true
+            }),
+            new CheckerPlugin(),
+            new CommonsChunkPlugin({
+                name: 'polyfills',
+                chunks: ['polyfills']
+            }),
+            new CommonsChunkPlugin({
+                name: 'vendor',
+                chunks: ['vendor'],
+                minChunks: 2
+            }),
+            new CommonsChunkPlugin({
+                name: 'main',
+                chunks: ['main'],
+                minChunks: 3
+            }),
+            new CommonsChunkPlugin({
+                name: ['polyfills', 'vendor', 'main'].reverse()
+            }),
+            new ContextReplacementPlugin(
+                // The (\\|\/) piece accounts for path separators in *nix and Windows
+                /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
+                helpers.root('src'), // location of your src
+                {
+                    // your Angular Async Route paths relative to this root directory
+                }
+            ),
             new HtmlWebpackPlugin({
-                template: 'src/index.html'
+                template: 'src/index.html',
+                title: METADATA.title,
+                chunksSortMode: 'dependency',
+                metadata: METADATA,
+                inject: 'head'
             }),
 
             new CopyWebpackPlugin([
                 { from: 'src/assets', to: 'assets' }
             ]),
+            new ScriptExtHtmlWebpackPlugin({
+                defaultAttribute: 'defer'
+            }),
+            new LoaderOptionsPlugin({}),
 
             new WebpackMd5Hash(),
 

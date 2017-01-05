@@ -5,7 +5,6 @@ import {HttpService} from '../http/http.service';
 declare var editormd;
 
 @Component({
-    moduleId: module.id,
     selector: 'home',
     templateUrl: 'home.html',
     providers: [HomeService, HttpService]

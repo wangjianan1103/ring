@@ -32,16 +32,18 @@ module.exports = function (options) {
     return {
         entry: {
             'polyfills': './src/polyfills.ts',
-            'main':      './src/vendor.ts'
+            'vendor':      './src/vendor.ts',
+            'main':      './src/app/main.ts'
         },
         module: {
             loaders: [
                 {
                     test: /\.ts$/,
                     use: [
-                        'awesome-typescript-loader',
+                        '@angularclass/hmr-loader?pretty=false&prod=true',
+                        'awesome-typescript-loader?{configFileName: "tsconfig.webpack.json"}',
                         'angular2-template-loader',
-                        'angular-router-loader'
+                        'angular-router-loader?loader=system&genDir=compiled/src/app&aot=' + AOT
                     ]
                 },
                 {
