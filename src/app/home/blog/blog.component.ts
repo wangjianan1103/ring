@@ -1,5 +1,5 @@
 import {Component, OnInit, ElementRef, Renderer} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import {HomeService} from '../home.service';
 import {HttpService} from '../../http/http.service';
 declare var editormd;
@@ -30,9 +30,15 @@ export class BlogComponent implements OnInit {
         this.marks = this.homeService.queryMark();
         this.channels = this.homeService.queryChannel();
         this.blogs = this.homeService.queryBlog();
+
+        this.route.params.forEach((params: Params) => {
+            let gid = params['gid']; // 使用+将字符串类型的参数转换成数字
+            this.homeService.getBlog(gid);
+        });
+
         let param = this.route.snapshot.queryParams;
-        if(param.gid != null) {
-            this.homeService.getBlog(param.gid);
+        if(param['gid'] != null) {
+            this.homeService.getBlog(param['gid']);
         }
 
         let editor_model = editormd({
