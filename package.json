@@ -10,13 +10,8 @@
     "build": "webpack --config webpack.config.js",
     "clean:dist": "npm run rimraf -- dist",
     "rimraf": "rimraf",
-    "server:dev": "webpack-dev-server --config config/webpack.prod.js --progress --profile --watch --content-base src/",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "typings": "typings",
-    "postinstall": "typings install",
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+    "server:dev": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base src/",
+    "start": "npm run server:dev"
   },
   "dependencies": {
     "@angular/common": "~2.4.1",
