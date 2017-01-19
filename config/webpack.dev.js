@@ -92,6 +92,9 @@ module.exports = function (env) {
             new CopyWebpackPlugin([
                 { from: 'src/upload_callback.html', to: '' }
             ]),
+            new CopyWebpackPlugin([
+                { from: 'src/404.html', to: '' }
+            ]),
             new ScriptExtHtmlWebpackPlugin({
                 defaultAttribute: 'defer'
             }),

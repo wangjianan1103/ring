@@ -6,7 +6,8 @@
   "repository": "",
   "license": "MIT",
   "scripts": {
-    "build:prod": "npm run clean:dist && webpack --config config/webpack.prod.js  --progress --profile --bail",
+    "build:prod": "npm run clean:dist && webpack --config config/webpack.prod.js",
+    "build:dev": "npm run clean:dist && webpack --config config/webpack.dev.js",
     "build": "webpack --config webpack.config.js",
     "clean:dist": "npm run rimraf -- dist",
     "rimraf": "rimraf",
