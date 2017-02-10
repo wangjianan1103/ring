@@ -1,13 +1,22 @@
 import {Injectable, ElementRef, Renderer} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import {Observable}     from 'rxjs/Observable';
 import {Router, ActivatedRoute} from "@angular/router";
 import {HttpService} from '../http/http.service';
 
 @Injectable()
 export class HomeService {
+    private headers = new Headers(
+        {
+            'Content-Type': 'application/json; charset=utf-8'
+        }
+    );
     private channel_: string;
     private markList_: Array<any> = new Array();
+    private options = new RequestOptions({headers: this.headers});
 
-    constructor(public httpService: HttpService,
+    constructor(private http: Http,
+                public httpService: HttpService,
                 private router: Router,
                 private elementRef: ElementRef,
                 private renderer: Renderer) {
@@ -34,11 +43,15 @@ export class HomeService {
      */
     publishArticles(title: string, html: string): void {
 
+        var ele = document.querySelector("channel");
+
         const channels = document.getElementsByName("channel");
         const marks = document.getElementsByName("mark");
         if (channels != null && marks != null) {
             for (let i = 0; i < channels.length; i++) {
                 const channel = channels[i];
+
+                document.getElementsByName("channel").item(i).
                 if (channel.dataset.channelFlag == 1) {
                     this.channel_ = channel.dataset.channelGid;
                 }
@@ -164,8 +177,9 @@ export class HomeService {
             .then(res => {
                 let data = res.json();
                 if (data.status == 0) {
-                    result = data.content.blogLoan.content;
-                    this.renderer.setText(document.getElementById("text"), result);
+                    result = data.content;
+                    document.getElementById("title").innerText = "45678";
+                    this.renderer.setText(document.getElementById("text"), result.content);
                 } else {
                     alert(data.message);
                 }
@@ -174,5 +188,27 @@ export class HomeService {
                 console.error(res);
             });
         return result;
+    }
+
+    getHeroes(loanGid: string): Observable<any> {
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.post("http://127.0.0.1:1103/manage/blog/getBlog", loanGid, this.options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        if (res.status < 200 || res.status >= 300) {
+            throw new Error('Bad response status: ' + res.status);
+        }
+        let body = res.json();
+        return body.data || {};
+    }
+
+    private handleError(error: any) {
+        // In a real world app, we might send the error to remote logging infrastructure
+        let errMsg = error.message || 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable.throw(errMsg);
     }
 }

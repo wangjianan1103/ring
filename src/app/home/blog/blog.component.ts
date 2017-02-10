@@ -31,14 +31,10 @@ export class BlogComponent implements OnInit {
         this.channels = this.homeService.queryChannel();
         this.blogs = this.homeService.queryBlog();
 
-        this.route.params.forEach((params: Params) => {
-            let gid = params['gid']; // 使用+将字符串类型的参数转换成数字
-            this.homeService.getBlog(gid);
-        });
-
         let param = this.route.snapshot.queryParams;
         if(param['gid'] != null) {
-            this.homeService.getBlog(param['gid']);
+            this.updateBlog = this.homeService.getBlog(param['gid']);
+            this.getBlog(param['gid']);
         }
 
         let editor_model = editormd({
@@ -106,5 +102,12 @@ export class BlogComponent implements OnInit {
             }
         });
 
+    }
+
+    getBlog(loanGid: string) {
+        this.homeService.getHeroes(loanGid)
+            .subscribe(
+                heroes => this.updateBlog = heroes
+            );
     }
 }
