@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef, Renderer} from "@angular/core";
+import {Component, OnInit, ElementRef, Renderer, ViewChild, ViewChildren, QueryList} from "@angular/core";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import {HomeService} from '../home.service';
 import {HttpService} from '../../http/http.service';
@@ -17,8 +17,14 @@ export class BlogComponent implements OnInit {
     public gid: string;
     private blogs: any[];
     private updateBlog: any;
+    private channel_: string;
+    private markList_: Array<any> = new Array();
 
-    constructor(private router: Router,
+    @ViewChildren('channel_name') channelList: QueryList<any>;
+    @ViewChildren('mark_name') markList: QueryList<any>;
+
+    constructor(private httpService: HttpService,
+                private router: Router,
                 private route: ActivatedRoute,
                 private homeService: HomeService,
                 private elementRef: ElementRef,
@@ -91,8 +97,8 @@ export class BlogComponent implements OnInit {
                  * @param {String}      selection  编辑器选中的文本
                  */
                 PublishArticles: () => {
-                    this.homeService.publishArticles(this.title, editor_model.getHTML());
-
+                    this.publishArticles(this.title, editor_model.getHTML());
+                    // this.homeService.publishArticles(this.title, editor_model.getHTML());
                 }
             },
             lang: {
@@ -109,5 +115,59 @@ export class BlogComponent implements OnInit {
             .subscribe(
                 heroes => this.updateBlog = heroes
             );
+    }
+
+    /**
+     * 发布文章
+     */
+    publishArticles(title: string, html: string): void {
+        const channels = this.channelList;
+        const marks = this.markList;
+        if (!(channels != null && marks != null)) {
+        } else {
+            this.channelList.forEach(ef => {
+                //noinspection TypeScriptUnresolvedVariable
+                let dataset = ef.nativeElement.dataset;
+                //noinspection TypeScriptUnresolvedVariable
+                if (dataset.channelFlag == 1) {
+                    this.channel_ = dataset.channelGid;
+                }
+            });
+
+            this.markList.forEach(ef => {
+                //noinspection TypeScriptUnresolvedVariable
+                let dataset = ef.nativeElement.dataset;
+                //noinspection TypeScriptUnresolvedVariable
+                if (dataset.markFlag == 1) {
+                    this.markList_.push(dataset.markGid);
+                }
+            });
+        }
+        if (this.channel_ == null || this.markList_ == null) {
+            alert("不允许为空");
+            return;
+        }
+        let body = JSON.stringify({
+            name: title,
+            type: '原创',
+            channel: this.channel_,
+            marks: this.markList_,
+            message: html
+        });
+
+        console.log(body);
+        this.httpService.post('manage/blog/add', body)
+            .then(res => {
+                let data = res.json();
+                if (data.status == 0) {
+                    alert(data.message);
+                    this.router.navigate(['']);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(res => {
+                console.error(res);
+            });
     }
 }

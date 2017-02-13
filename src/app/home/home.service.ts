@@ -11,8 +11,6 @@ export class HomeService {
             'Content-Type': 'application/json; charset=utf-8'
         }
     );
-    private channel_: string;
-    private markList_: Array<any> = new Array();
     private options = new RequestOptions({headers: this.headers});
 
     constructor(private http: Http,
@@ -31,59 +29,6 @@ export class HomeService {
                 let data = res.json();
                 alert(data.message);
                 this.router.navigate(['add']);
-            })
-            .catch(res => {
-                console.error(res);
-            });
-    }
-
-    /**
-     * 发布文章
-     * @returns {any}
-     */
-    publishArticles(title: string, html: string): void {
-
-        var ele = document.querySelector("channel");
-
-        const channels = document.getElementsByName("channel");
-        const marks = document.getElementsByName("mark");
-        if (channels != null && marks != null) {
-            for (let i = 0; i < channels.length; i++) {
-                const channel = channels[i];
-
-                document.getElementsByName("channel").item(i).
-                if (channel.dataset.channelFlag == 1) {
-                    this.channel_ = channel.dataset.channelGid;
-                }
-            }
-            for (let i = 0; i < marks.length; i++) {
-                const mark = marks[i];
-                //noinspection TypeScriptUnresolvedVariable
-                if (mark.dataset.markFlag == 1) {
-                    this.markList_.push(mark.dataset.markGid);
-                }
-            }
-        }
-        if (this.channel_ == null || this.markList_ == null) {
-            alert("不允许为空");
-            return;
-        }
-        let body = JSON.stringify({
-            name: title,
-            type: '原创',
-            channel: this.channel_,
-            marks: this.markList_,
-            message: html
-        });
-        this.httpService.post('manage/blog/add', body)
-            .then(res => {
-                let data = res.json();
-                if (data.status == 0) {
-                    alert(data.message);
-                    this.router.navigate(['']);
-                } else {
-                    alert(data.message);
-                }
             })
             .catch(res => {
                 console.error(res);
