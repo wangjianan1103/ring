@@ -113,18 +113,17 @@ export class HomeService {
     /**
      * 获取blog
      */
-    getBlog(parameters): any {
-        if (parameters == null) {
+    getBlog(blogGid: string): any {
+        if (blogGid == null) {
             return;
         }
-        let result: any;
-        this.httpService.post('manage/blog/getBlog', parameters)
+        let blog_demo: any;
+        this.httpService.post('manage/blog/getBlog', blogGid)
             .then(res => {
                 let data = res.json();
                 if (data.status == 0) {
-                    result = data.content;
-                    document.getElementById("title").innerText = "45678";
-                    this.renderer.setText(document.getElementById("text"), result.content);
+                    let demo = data.content;
+                    blog_demo = demo;
                 } else {
                     alert(data.message);
                 }
@@ -132,7 +131,7 @@ export class HomeService {
             .catch(res => {
                 console.error(res);
             });
-        return result;
+        return blog_demo;
     }
 
     getHeroes(loanGid: string): Observable<any> {

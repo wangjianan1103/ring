@@ -11,14 +11,16 @@ declare var editormd;
 })
 
 export class BlogComponent implements OnInit {
-    private title: string;
-    private marks: any[];
-    private channels: any[];
+    public title: string;
+    public marks: any[];
+    public channels: any[];
     public gid: string;
-    private blogs: any[];
-    private updateBlog: any;
-    private channel_: string;
-    private markList_: Array<any> = new Array();
+    public blogs: any[];
+    public updateBlog: any = {
+        "content": "dwadawdawd"
+    };
+    public channel_: string;
+    public markList_: Array<any> = new Array();
 
     @ViewChildren('channel_name') channelList: QueryList<any>;
     @ViewChildren('mark_name') markList: QueryList<any>;
@@ -39,8 +41,12 @@ export class BlogComponent implements OnInit {
 
         let param = this.route.snapshot.queryParams;
         if(param['gid'] != null) {
-            this.updateBlog = this.homeService.getBlog(param['gid']);
-            this.getBlog(param['gid']);
+            this.updateBlog = this.httpService.post('manage/blog/getBlog', param['gid'])
+                .then(res => this.updateBlog = res.json().data.content);
+
+            // this.updateBlog = this.homeService.getBlog(param['gid']);
+            // this.getBlog(param['gid']);
+
         }
 
         let editor_model = editormd({
@@ -111,10 +117,7 @@ export class BlogComponent implements OnInit {
     }
 
     getBlog(loanGid: string) {
-        this.homeService.getHeroes(loanGid)
-            .subscribe(
-                heroes => this.updateBlog = heroes
-            );
+        let aa = this.homeService.getBlog(loanGid);
     }
 
     /**
