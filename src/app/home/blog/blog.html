@@ -4,6 +4,7 @@
             <!-- 内容区域 -->
             <div class="col-md-10">
                 <input type="text" id="title" class="form-control" placeholder="写下笔记标题" [(ngModel)]="title">
+                <input type="hidden" class="form-control" [(ngModel)]="id">
                 <div id="editormd">
                     <textarea style="display:none;" id="text" [(ngModel)]="updateBlog.content"></textarea>
                 </div>

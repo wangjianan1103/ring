@@ -1,7 +1,9 @@
-import {Component, OnInit, ElementRef, Renderer, ViewChild, ViewChildren, QueryList} from "@angular/core";
-import {Router, ActivatedRoute, Params} from "@angular/router";
-import {HomeService} from '../home.service';
-import {HttpService} from '../../http/http.service';
+import {Component, OnInit, ElementRef, Renderer, ViewChildren, QueryList} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {HomeService} from "../home.service";
+import {HttpService} from "../../http/http.service";
+import "rxjs/add/operator/toPromise";
+
 declare var editormd;
 
 @Component({
@@ -14,7 +16,7 @@ export class BlogComponent implements OnInit {
     public title: string;
     public marks: any[];
     public channels: any[];
-    public gid: string;
+    public id: string;
     public blogs: any[];
     public updateBlog: any = {
         "content": "dwadawdawd"
@@ -41,12 +43,11 @@ export class BlogComponent implements OnInit {
 
         let param = this.route.snapshot.queryParams;
         if(param['gid'] != null) {
-            this.updateBlog = this.httpService.post('manage/blog/getBlog', param['gid'])
-                .then(res => this.updateBlog = res.json().data.content);
+            // this.httpService.post('manage/blog/getBlog', param['gid'])
+            //     .then(res => this.updateBlog = res.json().data.content);
 
             // this.updateBlog = this.homeService.getBlog(param['gid']);
-            // this.getBlog(param['gid']);
-
+            this.getBlog(param['gid']);
         }
 
         let editor_model = editormd({
@@ -117,7 +118,14 @@ export class BlogComponent implements OnInit {
     }
 
     getBlog(loanGid: string) {
-        let aa = this.homeService.getBlog(loanGid);
+        this.httpService.post('manage/blog/getBlog', loanGid)
+            .then(res => {
+                let blog = res.json().content;
+                console.info(blog);
+                this.updateBlog = blog;
+                this.title = blog.name;
+                this.id = blog.id;
+            });
     }
 
     /**
@@ -155,11 +163,11 @@ export class BlogComponent implements OnInit {
             type: '原创',
             channel: this.channel_,
             marks: this.markList_,
-            message: html
+            message: html,
+            id: this.id
         });
 
-        console.log(body);
-        this.httpService.post('manage/blog/add', body)
+        this.httpService.post('manage/blog/do', body)
             .then(res => {
                 let data = res.json();
                 if (data.status == 0) {
