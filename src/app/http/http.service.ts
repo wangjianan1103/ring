@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpService {
-    private path = 'http://60.205.180.147:8080/jasmine/';
+    private path = 'http://127.0.0.1:1103/';
     private headers = new Headers(
         {
             'Content-Type': 'application/json; charset=utf-8'

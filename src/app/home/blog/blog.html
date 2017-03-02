@@ -19,7 +19,11 @@
                 <hr style="margin-top: 5px; margin-bottom: 6px;">
                 <div>
                     <span *ngFor="let mark of marks">
-                        <a class="label label-info" #mark_name name="mark" [attr.data-mark-gid]="mark.gid" style="padding: 0.2em 0.4em 0.2em;" checkboxClickColor data-mark-flag="0">{{mark.name}}</a>
+                        <a class="label label-info" #mark_name data-mark-gid="0" [attr.data-mark-gid]="mark.gid" style="padding: 0.2em 0.4em 0.2em;" checkboxClickColor>{{mark.name}}</a>
+                    </span>
+
+                    <span *ngFor="let updateMark of updateMarkList">
+                        <a class="label label-info" #mark_name data-mark-gid="1" [attr.data-mark-gid]="updateMark.gid" style="padding: 0.2em 0.4em 0.2em; background-color: #468847;" checkboxClickColor>{{updateMark.name}}</a>
                     </span>
                 </div>
                 <br>
@@ -32,7 +36,7 @@
                 <hr style="margin-top: 5px; margin-bottom: 6px;">
                 <div>
                     <span *ngFor="let channel of channels">
-                        <a class="label label-info" name="channel" #channel_name [attr.data-channel-gid]="channel.gid" style="padding: 0.2em 0.4em 0.2em;" radioClickColor data-channel-flag="0">{{channel.name}}</a>
+                        <a class="label label-info" [style.background-color]="channelGid==channel.gid ? '#468847' : ''" [attr.data-channel-flag]="channelGid==channel.gid ? '1' : '0'" #channel_name [attr.data-channel-gid]="channel.gid" style="padding: 0.2em 0.4em 0.2em; " radioClickColor >{{channel.name}}</a>
                     </span>
                 </div>
                 <br>

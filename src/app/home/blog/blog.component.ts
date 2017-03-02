@@ -16,12 +16,15 @@ export class BlogComponent implements OnInit {
     public title: string;
     public marks: any[];
     public channels: any[];
-    public id: string;
     public blogs: any[];
+    // update model
+    public id: string;
+    public channelGid: string;
     public updateBlog: any = {
-        "content": "dwadawdawd"
+        "content": "内容"
     };
     public channel_: string;
+    public updateMarkList: Array<any> = new Array();
     public markList_: Array<any> = new Array();
 
     @ViewChildren('channel_name') channelList: QueryList<any>;
@@ -120,11 +123,36 @@ export class BlogComponent implements OnInit {
     getBlog(loanGid: string) {
         this.httpService.post('manage/blog/getBlog', loanGid)
             .then(res => {
-                let blog = res.json().content;
+                let blogInfo = res.json().content;
+                let blog = blogInfo.blogLoan;
+                let markList = blogInfo.markList;
                 console.info(blog);
+                console.info(markList);
                 this.updateBlog = blog;
                 this.title = blog.name;
                 this.id = blog.id;
+                this.channelGid=blog.channelGid;
+
+                // is true
+                let allMarks = this.marks;
+                let newMarks: Array<any> = new Array();
+                let oldMarks: Array<any> = new Array();
+
+                for (let i=0; i < allMarks.length; i++) {
+                    let allMarkGid = allMarks[i].gid;
+                    let flag = true;
+                    for (let j=0; j< markList.length; j++) {
+                        if (allMarkGid == markList[j]) {
+                            flag = false;
+                            newMarks.push(allMarks[i]);
+                        }
+                    }
+                    if (flag) {
+                        oldMarks.push(allMarks[i]);
+                    }
+                }
+                this.marks = oldMarks;
+                this.updateMarkList = newMarks;
             });
     }
 
