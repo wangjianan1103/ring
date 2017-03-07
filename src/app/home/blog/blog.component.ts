@@ -20,9 +20,7 @@ export class BlogComponent implements OnInit {
     // update model
     public id: string;
     public channelGid: string;
-    public updateBlog: any = {
-        "content": "内容"
-    };
+    public updateBlog: any;
     public channel_: string;
     public updateMarkList: Array<any> = new Array();
     public markList_: Array<any> = new Array();
@@ -39,6 +37,18 @@ export class BlogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        /** init data **/
+        this.title = "";
+        this.marks = [];
+        this.channels = [];
+        this.blogs = [];
+        this.id = "";
+        this.channelGid = "";
+        this.updateBlog = {};
+        this.channel_ = "";
+        this.updateMarkList = [];
+        this.markList_ = [];
+
         /** init  **/
         this.marks = this.homeService.queryMark();
         this.channels = this.homeService.queryChannel();
@@ -46,10 +56,6 @@ export class BlogComponent implements OnInit {
 
         let param = this.route.snapshot.queryParams;
         if(param['gid'] != null) {
-            // this.httpService.post('manage/blog/getBlog', param['gid'])
-            //     .then(res => this.updateBlog = res.json().data.content);
-
-            // this.updateBlog = this.homeService.getBlog(param['gid']);
             this.getBlog(param['gid']);
         }
 
@@ -100,15 +106,8 @@ export class BlogComponent implements OnInit {
                 PublishArticles: "发布文章"  // 如果没有图标，则可以这样直接插入内容，可以是字符串或HTML标签
             },
             toolbarHandlers: {
-                /**
-                 * @param {Object}      cm         CodeMirror对象
-                 * @param {Object}      icon       图标按钮jQuery元素对象
-                 * @param {Object}      cursor     CodeMirror的光标对象，可获取光标所在行和位置
-                 * @param {String}      selection  编辑器选中的文本
-                 */
                 PublishArticles: () => {
-                    this.publishArticles(this.title, editor_model.getHTML());
-                    // this.homeService.publishArticles(this.title, editor_model.getHTML());
+                    this.publishArticles(this.title, editor_model.getHTML(), editor_model.getMarkdown().toString());
                 }
             },
             lang: {
@@ -159,7 +158,7 @@ export class BlogComponent implements OnInit {
     /**
      * 发布文章
      */
-    publishArticles(title: string, html: string): void {
+    publishArticles(title: string, html: string, markdownContent: string): void {
         const channels = this.channelList;
         const marks = this.markList;
         if (!(channels != null && marks != null)) {
@@ -192,7 +191,8 @@ export class BlogComponent implements OnInit {
             channel: this.channel_,
             marks: this.markList_,
             message: html,
-            id: this.id
+            markdownContent: markdownContent,
+            id: this.id == "" ? null : this.id
         });
 
         this.httpService.post('manage/blog/do', body)

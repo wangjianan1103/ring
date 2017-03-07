@@ -6,7 +6,7 @@
                 <input type="text" id="title" class="form-control" placeholder="写下笔记标题" [(ngModel)]="title">
                 <input type="hidden" class="form-control" [(ngModel)]="id">
                 <div id="editormd">
-                    <textarea style="display:none;" id="text" [(ngModel)]="updateBlog.content"></textarea>
+                    <textarea style="display:none;" id="text" [(ngModel)]="updateBlog.markdownContent"></textarea>
                 </div>
                 <hr style="margin-top: 5px;">
             </div>
@@ -19,11 +19,11 @@
                 <hr style="margin-top: 5px; margin-bottom: 6px;">
                 <div>
                     <span *ngFor="let mark of marks">
-                        <a class="label label-info" #mark_name data-mark-gid="0" [attr.data-mark-gid]="mark.gid" style="padding: 0.2em 0.4em 0.2em;" checkboxClickColor>{{mark.name}}</a>
+                        <a class="label label-info" #mark_name data-mark-flag="0" [attr.data-mark-gid]="mark.gid" style="padding: 0.2em 0.4em 0.2em;" checkboxClickColor>{{mark.name}}</a>
                     </span>
 
                     <span *ngFor="let updateMark of updateMarkList">
-                        <a class="label label-info" #mark_name data-mark-gid="1" [attr.data-mark-gid]="updateMark.gid" style="padding: 0.2em 0.4em 0.2em; background-color: #468847;" checkboxClickColor>{{updateMark.name}}</a>
+                        <a class="label label-info" #mark_name data-mark-flag="1" [attr.data-mark-gid]="updateMark.gid" style="padding: 0.2em 0.4em 0.2em; background-color: #468847;" checkboxClickColor>{{updateMark.name}}</a>
                     </span>
                 </div>
                 <br>
