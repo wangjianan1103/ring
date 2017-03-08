@@ -28,7 +28,7 @@ export class HomeService {
             .then(res => {
                 let data = res.json();
                 alert(data.message);
-                this.router.navigate(['add']);
+                this.router.navigate(['index']);
             })
             .catch(res => {
                 console.error(res);

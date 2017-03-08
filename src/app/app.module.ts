@@ -8,6 +8,7 @@ import {routing} from './app.routing';
 import {NavbarComponent}         from './navbar/navbar.component';
 import {HomeComponent} from './home/home.component'
 import {BlogComponent} from './home/blog/blog.component'
+import {ViewComponent} from './home/blog/view.component';
 import {CheckboxClickColorDirective} from './config/checkboxClickColor.directive';
 import {RadioClickColorDirective} from './config/radioClickColor.directive';
 
@@ -24,6 +25,7 @@ import {RadioClickColorDirective} from './config/radioClickColor.directive';
         NavbarComponent,
         HomeComponent,
         BlogComponent,
+        ViewComponent,
         CheckboxClickColorDirective,
         RadioClickColorDirective
     ],
