@@ -209,4 +209,11 @@ export class BlogComponent implements OnInit {
                 console.error(res);
             });
     }
+
+    /**
+     * 添加标签
+     */
+    addMark(): void{
+        console.debug("添加标签")
+    }
 }
