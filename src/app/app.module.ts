@@ -11,6 +11,11 @@ import {BlogComponent} from './home/blog/blog.component'
 import {ViewComponent} from './home/blog/view.component';
 import {CheckboxClickColorDirective} from './config/checkboxClickColor.directive';
 import {RadioClickColorDirective} from './config/radioClickColor.directive';
+import {NavMenuDirective} from './config/navMenu.directive';
+import {DashboardComponent}         from './dashboard/dashboard.component';
+import {IndexComponent}         from './index/index.component';
+import {MarkComponent} from './mark/mark.component';
+import {ChannelComponent} from './channel/channel.component';
 
 @NgModule({
     imports: [
@@ -27,7 +32,12 @@ import {RadioClickColorDirective} from './config/radioClickColor.directive';
         BlogComponent,
         ViewComponent,
         CheckboxClickColorDirective,
-        RadioClickColorDirective
+        RadioClickColorDirective,
+        DashboardComponent,
+        NavMenuDirective,
+        IndexComponent,
+        MarkComponent,
+        ChannelComponent
     ],
     bootstrap: [AppComponent]
 })
