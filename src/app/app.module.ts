@@ -12,6 +12,7 @@ import {ViewComponent} from './home/blog/view.component';
 import {CheckboxClickColorDirective} from './config/checkboxClickColor.directive';
 import {RadioClickColorDirective} from './config/radioClickColor.directive';
 import {NavMenuDirective} from './config/navMenu.directive';
+import {MenuToggleDirective} from './config/menuToggle.directive';
 import {DashboardComponent}         from './dashboard/dashboard.component';
 import {IndexComponent}         from './index/index.component';
 import {MarkComponent} from './mark/mark.component';
@@ -37,7 +38,8 @@ import {ChannelComponent} from './channel/channel.component';
         NavMenuDirective,
         IndexComponent,
         MarkComponent,
-        ChannelComponent
+        ChannelComponent,
+        MenuToggleDirective
     ],
     bootstrap: [AppComponent]
 })

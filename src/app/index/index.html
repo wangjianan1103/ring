@@ -1,30 +1,29 @@
-<div class="app app-header-fixed" id="app">
+<div class="app app-header-fixed app-aside-folded" id="menu_app">
     <!-- navbar -->
     <div class="app-header navbar">
         <!-- navbar header -->
         <div class="navbar-header bg-dark">
-            <button class="pull-right visible-xs dk" data-toggle="class:show" data-target=".navbar-collapse">
+            <button menu-toggle class="pull-right visible-xs dk" data-toggle="show" data-target="navbar-collapse">
                 <i class="glyphicon glyphicon-cog"></i>
             </button>
-            <button class="pull-right visible-xs" data-toggle="class:off-screen" data-target=".app-aside"
-                    ui-scroll="app">
+            <button menu-toggle class="pull-right visible-xs" data-toggle="off-screen" data-target="app-aside">
                 <i class="glyphicon glyphicon-align-justify"></i>
             </button>
             <!-- brand -->
             <a href="" class="navbar-brand text-lt">
                 <i class="fa fa-btc"></i>
                 <img src="../../assets/image/logo.png" alt="." class="hide">
-                <span class="hidden-folded m-l-xs">oopmind</span>
+                <span class="hidden-folded m-l-xs">oopMind</span>
             </a>
             <!-- / brand -->
         </div>
         <!-- / navbar header -->
 
         <!-- navbar collapse -->
-        <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+        <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only" id="navbar-collapse">
             <!-- buttons -->
             <div class="nav navbar-nav hidden-xs">
-                <a href="#" class="btn no-shadow navbar-btn" data-toggle="class:app-aside-folded" data-target=".app">
+                <a menu-toggle class="btn no-shadow navbar-btn" data-toggle="app-aside-folded" data-target="menu_app">
                     <i class="fa fa-dedent fa-fw text"></i>
                     <i class="fa fa-indent fa-fw text-active"></i>
                 </a>
@@ -238,7 +237,7 @@
     <!-- / navbar -->
 
     <!-- menu -->
-    <div class="app-aside hidden-xs bg-dark">
+    <div class="app-aside hidden-xs bg-dark" id="app-aside">
         <div class="aside-wrap">
             <div class="navi-wrap">
                 <!-- user -->
