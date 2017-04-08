@@ -1,4 +1,4 @@
-<div class="app app-header-fixed app-aside-folded" id="menu_app">
+<div class="app app-header-fixed" id="menu_app">
     <!-- navbar -->
     <div class="app-header navbar">
         <!-- navbar header -->
@@ -135,11 +135,10 @@
             <!-- / link and dropdown -->
 
             <!-- search form -->
-            <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo"
-                  data-target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+            <form class="navbar-form navbar-form-sm navbar-left shift" data-target=".navbar-collapse" role="search">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" ng-model="selected"
+                        <input type="text"
                                typeahead="state for state in states | filter:$viewValue | limitTo:8"
                                class="form-control input-sm bg-light no-border rounded padder"
                                placeholder="Search projects...">
@@ -213,17 +212,17 @@
                             </a>
                         </li>
                         <li>
-                            <a ui-sref="app.page.profile">Profile</a>
+                            <a>Profile</a>
                         </li>
                         <li>
-                            <a ui-sref="app.docs">
+                            <a>
                                 <span class="label bg-info pull-right">new</span>
                                 Help
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a ui-sref="access.signin">Logout</a>
+                            <a>Logout</a>
                         </li>
                     </ul>
                     <!-- / dropdown -->
@@ -243,7 +242,7 @@
                 <!-- user -->
                 <div class="clearfix hidden-xs text-center" id="aside-user">
                     <div class="dropdown wrapper">
-                        <a ui-sref="app.page.profile">
+                        <a>
                             <span class="thumb-lg w-auto-folded avatar m-t-sm">
                               <img src="../../assets/image/wang.png" class="img-full" alt="...">
                             </span>
@@ -350,17 +349,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="apps.note">
+                                    <a>
                                         <span>Note</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="apps.contact">
+                                    <a>
                                         <span>Contacts</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="app.weather">
+                                    <a>
                                         <span>Weather</span>
                                     </a>
                                 </li>
@@ -389,17 +388,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="layout.app">
+                                    <a>
                                         <span>Application</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="layout.fullwidth">
+                                    <a>
                                         <span>Full width</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="layout.mobile">
+                                    <a>
                                         <span>Mobile</span>
                                     </a>
                                 </li>
@@ -427,22 +426,22 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="access.signin">
+                                    <a>
                                         <span translate="aside.nav.components.pages.SIGNIN">Signin</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="access.signup">
+                                    <a>
                                         <span translate="aside.nav.components.pages.SIGNUP">Signup</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="access.forgotpwd">
+                                    <a>
                                         <span translate="aside.nav.components.pages.FORGOT_PASSWORD">Forgot password</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="access.404">
+                                    <a>
                                         <span translate="aside.nav.components.pages.404">404</span>
                                     </a>
                                 </li>
@@ -455,14 +454,14 @@
                             <span translate="aside.nav.your_stuff.YOUR_STUFF">Your Stuff</span>
                         </li>
                         <li>
-                            <a ui-nav ui-sref="app.page.profile">
+                            <a ui-nav>
                                 <i class="icon-user icon text-success-lter"></i>
                                 <b class="badge bg-success pull-right">30%</b>
                                 <span translate="aside.nav.your_stuff.PROFILE">Profile</span>
                             </a>
                         </li>
                         <li>
-                            <a ui-nav ui-sref="app.docs">
+                            <a ui-nav>
                                 <i class="icon-question icon"></i>
                                 <span translate="aside.nav.your_stuff.DOCUMENTS">Documents</span>
                             </a>

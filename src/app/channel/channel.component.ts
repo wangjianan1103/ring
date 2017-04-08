@@ -21,4 +21,11 @@ export class ChannelComponent implements OnInit {
         this.channels = this.homeService.queryChannel();
     }
 
+    /**
+     * 添加标签
+     */
+    addChannel(): void{
+        console.debug("添加标签")
+    }
+
 }

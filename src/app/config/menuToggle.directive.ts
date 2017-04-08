@@ -18,7 +18,6 @@ export class MenuToggleDirective {
     }
 
     @HostListener('click') onClick() {
-        console.log('abc');
         let dataSet = this.elementRef.nativeElement.dataset;
         let appId = dataSet.target;
         let toggle = dataSet.toggle;

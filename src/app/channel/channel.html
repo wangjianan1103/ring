@@ -7,7 +7,7 @@
                     <h3 class="panel-title">首页</h3>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-primary btn-sm" >添加</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addChannelModal">添加</button>
                 </div>
                 <!--内容列表-->
                 <div class="table-responsive">
@@ -55,6 +55,33 @@
                         </ul>
                     </div>
                 </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addChannelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加标签</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="markName">名称</span>
+                    <input type="text" class="form-control" placeholder="名称" aria-describedby="sizing-addon3">
+                </div>
+                <br>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="markDesc">描述</span>
+                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addChannel()">Save changes</button>
             </div>
         </div>
     </div>

@@ -4,8 +4,8 @@ import {HomeService} from '../home/home.service';
 import {HttpService} from '../http/http.service';
 
 @Component({
-    selector: 'mark',
-    templateUrl: 'mark.html',
+    selector: 'markTag',
+    templateUrl: 'markTag.html',
     providers: [HomeService, HttpService]
 })
 export class MarkComponent implements OnInit {
