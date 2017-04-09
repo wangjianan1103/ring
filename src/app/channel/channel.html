@@ -14,16 +14,18 @@
                     <table class="table table-hover table-condensed table-striped">
                         <tr>
                             <th>创建时间</th>
-                            <th>标题</th>
-                            <th>查看次数</th>
-                            <th>是否置顶</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>是否有效</th>
+                            <th>排序</th>
                             <th>操作</th>
                         </tr>
                         <tr *ngFor="let channel of channels">
                             <td>{{channel.createTime == null ? 0 : channel.createTime * 1000 | date:"yyyy-MM-dd"}}</td>
                             <td>{{channel.name}}</td>
-                            <td>22222</td>
-                            <td>33333</td>
+                            <td>{{channel.description}}</td>
+                            <td>{{channel.isValid}}</td>
+                            <td>{{channel.orderNum}}</td>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group" aria-label="...">
                                     <button type="button" class="btn btn-default" >查看</button>
@@ -66,22 +68,27 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加标签</h4>
+                <h4 class="modal-title" id="myModalLabel">添加Channel</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="markName">名称</span>
-                    <input type="text" class="form-control" placeholder="名称" aria-describedby="sizing-addon3">
+                    <span class="input-group-addon">名称</span>
+                    <input type="text" class="form-control" placeholder="名称" aria-describedby="sizing-addon3" [(ngModel)]="channelName">
                 </div>
                 <br>
                 <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="markDesc">描述</span>
-                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3">
+                    <span class="input-group-addon">描述</span>
+                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3" [(ngModel)]="channelDesc">
+                </div>
+                <br>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">排序</span>
+                    <input type="text" class="form-control" placeholder="排序" aria-describedby="sizing-addon3" [(ngModel)]="channelOrder">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addChannel()">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addChannel()">保存</button>
             </div>
         </div>
     </div>

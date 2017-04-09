@@ -10,10 +10,14 @@ import {HttpService} from '../http/http.service';
 })
 export class ChannelComponent implements OnInit {
     private channels: any[];
+    private channelName: string;
+    private channelDesc: string;
+    private channelOrder: string;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private homeService: HomeService) {
+                private homeService: HomeService,
+                private httpService: HttpService) {
     }
 
     ngOnInit(): void {
@@ -25,7 +29,27 @@ export class ChannelComponent implements OnInit {
      * 添加标签
      */
     addChannel(): void{
-        console.debug("添加标签")
+        console.debug("添加标签");
+
+        let body = JSON.stringify({
+            channelName: this.channelName,
+            channelDesc: this.channelDesc,
+            channelOrder: this.channelOrder
+        });
+
+        this.httpService.post('channel/add', body)
+            .then(res => {
+                let data = res.json();
+                if (data.status == 0) {
+                    alert(data.message);
+                    this.router.navigate(['channel']);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(res => {
+                console.error(res);
+            });
     }
 
 }
