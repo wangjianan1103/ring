@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ElementRef, Renderer, HostListener} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {HomeService} from '../home/home.service';
 import {HttpService} from '../http/http.service';
+declare var jQuery:any;
 
 @Component({
     selector: 'channel',
@@ -17,12 +18,22 @@ export class ChannelComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private homeService: HomeService,
-                private httpService: HttpService) {
+                private httpService: HttpService,
+                private elementRef: ElementRef,
+                private renderer: Renderer) {
     }
 
     ngOnInit(): void {
         /** init  **/
         this.channels = this.homeService.queryChannel();
+
+        jQuery('body').confirmation({
+            selector: '[data-toggle="confirmation"]',
+            onConfirm: function() {
+                alert('cancel');
+            },
+            onCancel: function() { alert('cancel') }
+        });
     }
 
     /**
@@ -50,6 +61,22 @@ export class ChannelComponent implements OnInit {
             .catch(res => {
                 console.error(res);
             });
+    }
+
+    /**
+     * 删除标签
+     * @param gid
+     */
+    delete(gid: string){
+        alert(gid);
+        if (confirm("Are you sure?")) {
+            console.debug(gid);
+
+        }
+
+        if (gid == null) {
+            alert("gid 不允许为null")
+        }
     }
 
 }
