@@ -133,4 +133,30 @@ export class HomeService {
             });
         return blog_demo;
     }
+
+
+    /**
+     * 查询channel
+     */
+    queryFriend(): any[] {
+        let channels: Array<any> = new Array();
+        let body = JSON.stringify({});
+        this.httpService.post('manage/channel/getChannel', body)
+            .then(res => {
+                let data = res.json();
+                if (data.status == 0) {
+                    var content = data.content;
+                    for (let i = 0; i < content.length; i++) {
+                        let channel = content[i];
+                        channels.push(channel);
+                    }
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(res => {
+                console.error(res);
+            });
+        return channels;
+    }
 }

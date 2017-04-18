@@ -12,6 +12,7 @@ const appRoutes: Routes = [
     {path: 'blog', component: HomeComponent},
     {path: 'mark', component: MarkComponent},
     {path: 'channel', component: ChannelComponent},
+    {path: 'friend', component: ChannelComponent},
     {path: 'view/:id', component: ViewComponent},
     {
         path: 'add',

@@ -17,6 +17,7 @@ import {DashboardComponent}         from './dashboard/dashboard.component';
 import {IndexComponent}         from './index/index.component';
 import {MarkComponent} from './mark/mark.component';
 import {ChannelComponent} from './channel/channel.component';
+import {FriendComponent} from './friend/friend.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import {ChannelComponent} from './channel/channel.component';
         IndexComponent,
         MarkComponent,
         ChannelComponent,
-        MenuToggleDirective
+        MenuToggleDirective,
+        FriendComponent
     ],
     bootstrap: [AppComponent]
 })

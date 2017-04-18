@@ -5,5 +5,5 @@ import {Component} from '@angular/core';
     templateUrl: './app.html'
 })
 export class AppComponent {
-
+    title: string = "后台管理系统---首页";
 }

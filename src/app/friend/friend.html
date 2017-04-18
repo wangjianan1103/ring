@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- 内容区域 -->
+        <div class="col-md-12 col-xs-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">首页</h3>
+                </div>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addChannelModal">添加</button>
+                </div>
+                <!--内容列表-->
+                <div class="table-responsive">
+                    <table class="table table-hover table-condensed table-striped">
+                        <tr>
+                            <th>创建时间</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>是否有效</th>
+                            <th>排序</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr *ngFor="let channel of channels">
+                            <td>{{channel.createTime == null ? 0 : channel.createTime * 1000 | date:"yyyy-MM-dd"}}</td>
+                            <td>{{channel.name}}</td>
+                            <td>{{channel.description}}</td>
+                            <td>{{channel.isValid}}</td>
+                            <td>{{channel.orderNum}}</td>
+                            <td>
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-primary" >修改</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="confirmation">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <nav>
+                    <div class="col-lg-4 col-lg-offset-4  col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li class="next">
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addChannelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加Channel</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">名称</span>
+                    <input type="text" class="form-control" placeholder="名称" aria-describedby="sizing-addon3" [(ngModel)]="channelName">
+                </div>
+                <br>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">描述</span>
+                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3" [(ngModel)]="channelDesc">
+                </div>
+                <br>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">排序</span>
+                    <input type="text" class="form-control" placeholder="排序" aria-describedby="sizing-addon3" [(ngModel)]="channelOrder">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addChannel()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
