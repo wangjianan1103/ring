@@ -6,10 +6,14 @@ import {HttpService} from "../http/http.service";
 @Component({
     selector: 'friend',
     templateUrl: 'friend.html',
-    providers: []
+    providers: [HomeService, HttpService]
 })
 export class FriendComponent implements OnInit {
     private friend_list: any[];
+    private friendName: string;
+    private friendLink: string;
+    private friendDesc: string;
+
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -27,15 +31,21 @@ export class FriendComponent implements OnInit {
     /**
      * 添加标签
      */
-    addChannel(): void{
-        console.debug("添加标签");
+    addFriend(): void{
+        console.debug("添加友链");
 
-        this.httpService.post('channel/add', null)
+        let body = JSON.stringify({
+            friendName: this.friendName,
+            friendLink: this.friendLink,
+            friendDesc: this.friendDesc
+        });
+
+        this.httpService.post('friend/add', body)
             .then(res => {
                 let data = res.json();
                 if (data.status == 0) {
                     alert(data.message);
-                    this.router.navigate(['channel']);
+                    this.router.navigate(['friend']);
                 } else {
                     alert(data.message);
                 }

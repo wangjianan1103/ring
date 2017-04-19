@@ -136,19 +136,19 @@ export class HomeService {
 
 
     /**
-     * 查询channel
+     * 查询friend
      */
     queryFriend(): any[] {
-        let channels: Array<any> = new Array();
+        let friends: Array<any> = new Array();
         let body = JSON.stringify({});
-        this.httpService.post('manage/channel/getChannel', body)
+        this.httpService.post('friend/getFriend', body)
             .then(res => {
                 let data = res.json();
                 if (data.status == 0) {
                     var content = data.content;
                     for (let i = 0; i < content.length; i++) {
-                        let channel = content[i];
-                        channels.push(channel);
+                        let friend = content[i];
+                        friends.push(friend);
                     }
                 } else {
                     alert(data.message);
@@ -157,6 +157,6 @@ export class HomeService {
             .catch(res => {
                 console.error(res);
             });
-        return channels;
+        return friends;
     }
 }

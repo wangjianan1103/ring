@@ -6,13 +6,14 @@ import {BlogComponent} from './home/blog/blog.component';
 import {ViewComponent} from './home/blog/view.component';
 import {MarkComponent} from './mark/mark.component';
 import {ChannelComponent} from './channel/channel.component';
+import {FriendComponent} from './friend/friend.component';
 
 const appRoutes: Routes = [
     {path: '', component: DashboardComponent},
     {path: 'blog', component: HomeComponent},
     {path: 'mark', component: MarkComponent},
     {path: 'channel', component: ChannelComponent},
-    {path: 'friend', component: ChannelComponent},
+    {path: 'friend', component: FriendComponent},
     {path: 'view/:id', component: ViewComponent},
     {
         path: 'add',

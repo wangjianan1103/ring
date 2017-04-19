@@ -7,7 +7,7 @@
                     <h3 class="panel-title">首页</h3>
                 </div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addChannelModal">添加</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addFriendModal">添加</button>
                 </div>
                 <!--内容列表-->
                 <div class="table-responsive">
@@ -17,15 +17,13 @@
                             <th>名称</th>
                             <th>描述</th>
                             <th>是否有效</th>
-                            <th>排序</th>
                             <th>操作</th>
                         </tr>
-                        <tr *ngFor="let channel of channels">
-                            <td>{{channel.createTime == null ? 0 : channel.createTime * 1000 | date:"yyyy-MM-dd"}}</td>
-                            <td>{{channel.name}}</td>
-                            <td>{{channel.description}}</td>
-                            <td>{{channel.isValid}}</td>
-                            <td>{{channel.orderNum}}</td>
+                        <tr *ngFor="let friend of friend_list">
+                            <td>{{friend.createTime == null ? 0 : friend.createTime * 1000 | date:"yyyy-MM-dd"}}</td>
+                            <td>{{friend.name}}</td>
+                            <td>{{friend.description}}</td>
+                            <td>{{friend.isVaild}}</td>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group" aria-label="...">
                                     <button type="button" class="btn btn-primary" >修改</button>
@@ -62,32 +60,33 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addChannelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addFriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加Channel</h4>
+                <h4 class="modal-title" id="myModalLabel">添加Friend</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-addon">名称</span>
-                    <input type="text" class="form-control" placeholder="名称" aria-describedby="sizing-addon3" [(ngModel)]="channelName">
+                    <span class="input-group-addon">链接名称</span>
+                    <input type="text" class="form-control" placeholder="链接名称" aria-describedby="sizing-addon3" [(ngModel)]="friendName">
+                </div>
+                <br>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">链接地址</span>
+                    <input type="text" class="form-control" placeholder="链接地址" aria-describedby="sizing-addon3" [(ngModel)]="friendLink">
                 </div>
                 <br>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon">描述</span>
-                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3" [(ngModel)]="channelDesc">
+                    <input type="text" class="form-control" placeholder="描述" aria-describedby="sizing-addon3" [(ngModel)]="friendDesc">
                 </div>
                 <br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">排序</span>
-                    <input type="text" class="form-control" placeholder="排序" aria-describedby="sizing-addon3" [(ngModel)]="channelOrder">
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addChannel()">保存</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addFriend()">保存</button>
             </div>
         </div>
     </div>
