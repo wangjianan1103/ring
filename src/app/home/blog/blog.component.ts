@@ -85,9 +85,9 @@ export class BlogComponent implements OnInit {
             //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "http://api.wangjianan.top/upload/put",
+            imageUploadURL: "http://api.oopmind.com/upload/put",
             crossDomainUpload : true,
-            uploadCallbackURL : "http://work.wangjianan.top/upload_callback.html",
+            uploadCallbackURL : "http://work.oopmind.com/upload_callback.html",
             // previewTheme : "dark",
             toolbarIcons: function () {
                 return [
