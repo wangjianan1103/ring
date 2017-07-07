@@ -2,7 +2,6 @@ import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule}   from '@angular/forms';
 import {HttpModule, JsonpModule}    from '@angular/http';
-// import {BrowserTransferStateModule} from '../modules/transfer-state/browser-transfer-state.module';
 
 import {AppComponent}   from './app.component';
 import {routing} from './app.routing';
@@ -22,9 +21,7 @@ import {FriendComponent} from './friend/friend.component';
 
 @NgModule({
     imports: [
-        BrowserModule.withServerTransition({
-            appId: 'my-app-id'
-        }),
+        BrowserModule,
         FormsModule,
         routing,
         HttpModule,
